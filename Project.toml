@@ -3,11 +3,18 @@ uuid = "518c31a9-72dd-41b9-826f-606c4258a582"
 authors = ["Tianyi Pu <912396513@qq.com> and contributors"]
 version = "1.0.0-DEV"
 
+[deps]
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+Scanf = "6ef1bc8b-493b-44e1-8d40-549aa65c4b41"
+Unroll = "36e64239-2ab9-4580-84fb-56737a503d36"
+
 [compat]
 julia = "1"
 
 [extras]
+BeepBeep = "97dd0070-d6c0-43ac-b134-ca84cdbd343e"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
-test = ["Test"]
+test = ["BeepBeep", "Random", "Test"]
