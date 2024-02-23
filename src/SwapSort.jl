@@ -6,6 +6,7 @@ export swapsort, tuplesort
 
 include("consts.jl")
 include("utils.jl")
+include("core.jl")
 
 """
     swapsort(a...; lt=isless, by=identity)
