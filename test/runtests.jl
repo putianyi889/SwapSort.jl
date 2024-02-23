@@ -25,10 +25,3 @@ end
         @test collect(swapsort(randperm(N)...)) == 1:N
     end
 end
-
-using BeepBeep
-if Sys.iswindows()
-    if relpath(@__FILE__, "/") != "a\\SwapSort.jl\\SwapSort.jl\\test\\runtests.jl" # the CI runner
-        beep(2)
-    end
-end
