@@ -1,6 +1,6 @@
 module SwapSort
 
-using JSON, Scanf, Unroll
+using JSON, Unroll
 
 export swapsort, tuplesort
 
