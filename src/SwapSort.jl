@@ -13,7 +13,7 @@ include("core.jl")
 
 Sort the arguments, returning a sorted tuple. `lt` and `by` keywords work the same as `Base.sort`. `swapsort` supports up to 64 arguments. See also [`tuplesort`](@ref).
 """
-swapsort
+swapsort(a; kw...) = a
 
 """
     tuplesort(t::Tuple; lt=isless, by=identity)

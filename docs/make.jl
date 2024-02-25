@@ -1,7 +1,7 @@
 using Documenter
 using SwapSort
 
-makedocs(
+@time makedocs(
     sitename = "SwapSort",
     format = Documenter.HTML(),
     modules = [SwapSort]

@@ -23,6 +23,8 @@ The exported `swapsort` at present chooses the least available `L` for each `N`.
 show(SwapSort.BESTSIZE)
 ```
 
+The exported `tuplesort` is just another wrapper. It uses a different name as `swapsort` because otherwise it would be ambiguous whether the tuple is considered as one element or a group of elements. We note that `TupleTools.jl` uses merge sort on tuples.
+
 ## Performance
 The sorting algorithm is called [sorting network](https://en.wikipedia.org/wiki/Sorting_network). It's not the most efficient algorithm for general purpose, but in Julia, it excels at sorting a few discrete variables, as collecting/splatting is very slow.
 
