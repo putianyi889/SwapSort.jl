@@ -1,6 +1,11 @@
 using Random
 using SwapSort
 using Test
+using Aqua
+
+@testset "Aqua" begin
+    Aqua.test_all(SwapSort)
+end
 
 @testset "sorters" begin
     for (N,D,L) in SwapSort.SORTERS
