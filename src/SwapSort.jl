@@ -20,7 +20,7 @@ swapsort(a; kw...) = a
 
 Return a sorted tuple. `lt` and `by` keywords work the same as `Base.sort`. `tuplesort` calls [`swapsort`](@ref) and supports at most 64 elements.
 """
-tuplesort
+tuplesort(a::Tuple{Any}; kw...) = a
 
 @unroll for para in SORTERS
     @makesorter(MAINPATH * _filename(para...))
