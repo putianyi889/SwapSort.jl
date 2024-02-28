@@ -7,6 +7,7 @@ on:
       - 'src/**'
       - 'test/**'
       - '.github/workflows/CI.yml'
+      - 'Project.toml'
     tags: ['*']
   pull_request:
     branches:
@@ -15,6 +16,7 @@ on:
       - 'src/**'
       - 'test/**'
       - '.github/workflows/CI.yml'
+      - 'Project.toml'
   workflow_dispatch:
 concurrency:
   # Skip intermediate builds: always.

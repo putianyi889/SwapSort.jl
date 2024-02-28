@@ -8,6 +8,7 @@ on:
       - 'src/**'
       - 'docs/**'
       - '.github/workflows/Documentation.yml'
+      - 'Project.toml'
     tags: '*'
   pull_request:
     branches:
@@ -16,6 +17,7 @@ on:
       - 'src/**'
       - 'docs/**'
       - '.github/workflows/Documentation.yml'
+      - 'Project.toml'
   workflow_dispatch:
 jobs:
   build:
