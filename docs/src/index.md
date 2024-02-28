@@ -7,7 +7,7 @@ This package is intended to be a successor of [SortingNetworks.jl](https://githu
   - Easier to to add new algorithms as all codes are generated.
   - Supports sorting across different types. Note that type stability will become a problem in this case.
 - **CONS**
-  - Very long precompilation (~55s on my machine). The current bottleneck is `JSON.parsefile`. The importing is fine (~30ms).
+  - Very long precompilation (~30s on CI). The current bottleneck is `JSON.parsefile`. The compilation is ok and the importing is fast.
   - Harder to troubleshoot since the most important things are written in macros.
   - Does not support sorting a vector. The reason is that `Base.sort` is efficient enough for a vector.
   - Does not support sorting a tuple at present.
