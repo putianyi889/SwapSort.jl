@@ -20,12 +20,13 @@ end
 end
 
 @testset "tuplesort" begin
-    for N in 2:64
+    for N in 1:64
         @test tuplesort(Tuple(randperm(N))) == Tuple(1:N)
     end
 end
 
 @testset "swapsort" begin
+    @test swapsort(1) == 1
     for N in 2:64
         @test collect(swapsort(randperm(N)...)) == 1:N
     end
