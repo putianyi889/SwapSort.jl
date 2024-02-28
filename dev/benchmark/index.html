@@ -5,43 +5,43 @@ Build Info:
   Official https://julialang.org/ release
 Platform Info:
   OS: Linux (x86_64-linux-gnu)
-  CPU: 2 × Intel(R) Xeon(R) Platinum 8171M CPU @ 2.60GHz
+  CPU: 4 × AMD EPYC 7763 64-Core Processor
   WORD_SIZE: 64
   LIBM: libopenlibm
-  LLVM: libLLVM-15.0.7 (ORCJIT, skylake-avx512)
-Threads: 1 default, 0 interactive, 1 GC (on 2 virtual cores)</code><br/><code class="language-julia-repl hljs" style="display:block;">julia&gt; Pkg.status()</code><code class="nohighlight hljs ansi" style="display:block;">Status `~/work/SwapSort.jl/SwapSort.jl/docs/Project.toml`
-  [6e4b80f9] BenchmarkTools v1.4.0
+  LLVM: libLLVM-15.0.7 (ORCJIT, znver3)
+Threads: 1 default, 0 interactive, 1 GC (on 4 virtual cores)</code><br/><code class="language-julia-repl hljs" style="display:block;">julia&gt; Pkg.status()</code><code class="nohighlight hljs ansi" style="display:block;">Status `~/work/SwapSort.jl/SwapSort.jl/docs/Project.toml`
+  [6e4b80f9] BenchmarkTools v1.5.0
   [e30172f5] Documenter v1.2.1
   [b964fa9f] LaTeXStrings v1.3.1
   [91a5bcdd] Plots v1.40.1
   [90137ffa] StaticArrays v1.9.3
   [518c31a9] SwapSort v1.0.0-DEV `~/work/SwapSort.jl/SwapSort.jl`
-  [9a3f8284] Random</code></pre><h2 id="Package-loading"><a class="docs-heading-anchor" href="#Package-loading">Package loading</a><a id="Package-loading-1"></a><a class="docs-heading-anchor-permalink" href="#Package-loading" title="Permalink"></a></h2><p>The precompilation is very slow since the package reads many <code>json</code> files and build sorting methods based on them.</p><pre><code class="language-julia-repl hljs" style="display:block;">julia&gt; @time Pkg.precompile(&quot;SwapSort&quot;)</code><code class="nohighlight hljs ansi" style="display:block;">  2.503307 seconds (1.10 M allocations: 77.507 MiB, 5.61% gc time, 93.23% compilation time)</code><br/><code class="language-julia-repl hljs" style="display:block;">julia&gt; @time using SwapSort</code><code class="nohighlight hljs ansi" style="display:block;">  0.000181 seconds (153 allocations: 14.469 KiB)</code></pre><h2 id="Same-type-(type-stable)"><a class="docs-heading-anchor" href="#Same-type-(type-stable)">Same type (type-stable)</a><a id="Same-type-(type-stable)-1"></a><a class="docs-heading-anchor-permalink" href="#Same-type-(type-stable)" title="Permalink"></a></h2><p>When sorting variables of the same type, <code>swapsort</code> has longer compilation time but from 5x to 100x runtime depending on the sorting size. To save the build time of the doc, this page only contains a simplified benchmark. For the full benchmark, run the <a href="https://github.com/putianyi889/SwapSort.jl/blob/master/scripts/bench_var_sorting.jl">script</a>.</p><pre><code class="language-julia hljs">using SwapSort, StaticArrays, Plots, BenchmarkTools
+  [9a3f8284] Random</code></pre><h2 id="Package-loading"><a class="docs-heading-anchor" href="#Package-loading">Package loading</a><a id="Package-loading-1"></a><a class="docs-heading-anchor-permalink" href="#Package-loading" title="Permalink"></a></h2><p>The precompilation is very slow since the package reads many <code>json</code> files and build sorting methods based on them.</p><pre><code class="language-julia-repl hljs" style="display:block;">julia&gt; @time Pkg.precompile(&quot;SwapSort&quot;)</code><code class="nohighlight hljs ansi" style="display:block;">  1.582212 seconds (1.10 M allocations: 77.521 MiB, 4.66% gc time, 94.07% compilation time)</code><br/><code class="language-julia-repl hljs" style="display:block;">julia&gt; @time using SwapSort</code><code class="nohighlight hljs ansi" style="display:block;">  0.000117 seconds (153 allocations: 14.469 KiB)</code></pre><h2 id="Same-type-(type-stable)"><a class="docs-heading-anchor" href="#Same-type-(type-stable)">Same type (type-stable)</a><a id="Same-type-(type-stable)-1"></a><a class="docs-heading-anchor-permalink" href="#Same-type-(type-stable)" title="Permalink"></a></h2><p>When sorting variables of the same type, <code>swapsort</code> has longer compilation time but from 5x to 100x runtime depending on the sorting size. To save the build time of the doc, this page only contains a simplified benchmark. For the full benchmark, run the <a href="https://github.com/putianyi889/SwapSort.jl/blob/master/scripts/bench_var_sorting.jl">script</a>.</p><pre><code class="language-julia hljs">using SwapSort, StaticArrays, Plots, BenchmarkTools
 samples = [1,2,4,8,16,32,64]
 swapsorttime = zeros(7)
 svectortime = zeros(7)
 vectortime = zeros(7)
 a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,Ja,Fe,Ma,Ap,My,Ju,Jl,Au,Se,Oc,No,De = rand(64)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">64-element Vector{Float64}:
- 0.03690513357923075
- 0.10314538678300744
- 0.20981943988026353
- 0.4170343522069384
- 0.8340315188923318
- 0.05567614645351493
- 0.6666981417583379
- 0.24398298625649517
- 0.29643884902928475
- 0.36335673043290106
+ 0.13149337274461181
+ 0.15022822903065514
+ 0.3466555255310896
+ 0.8254747126978271
+ 0.7868499772461707
+ 0.3884835620347813
+ 0.7125606921940892
+ 0.6682370732651164
+ 0.12437102833521319
+ 0.7742889216772635
  ⋮
- 0.5790339512248562
- 0.8019549336426676
- 0.5118299985002054
- 0.2857914765173615
- 0.729339285107616
- 0.44594646311695463
- 0.32269515497383083
- 0.4717320647511978
- 0.46897420853064753</code></pre><h3 id="Compilation"><a class="docs-heading-anchor" href="#Compilation">Compilation</a><a id="Compilation-1"></a><a class="docs-heading-anchor-permalink" href="#Compilation" title="Permalink"></a></h3><pre><code class="language-julia hljs">swapsorttime[1] = @elapsed swapsort(a)
+ 0.09302758238028641
+ 0.8464347451961607
+ 0.9868445896010382
+ 0.6127381539228343
+ 0.7197211104196284
+ 0.6976228510074353
+ 0.8505858960160484
+ 0.14675642095731445
+ 0.05677050480992418</code></pre><h3 id="Compilation"><a class="docs-heading-anchor" href="#Compilation">Compilation</a><a id="Compilation-1"></a><a class="docs-heading-anchor-permalink" href="#Compilation" title="Permalink"></a></h3><pre><code class="language-julia hljs">swapsorttime[1] = @elapsed swapsort(a)
 swapsorttime[2] = @elapsed swapsort(a,b)
 swapsorttime[3] = @elapsed swapsort(a,b,c,d)
 swapsorttime[4] = @elapsed swapsort(a,b,c,d,e,f,g,h)
@@ -55,8 +55,8 @@ svectortime[1] = @elapsed sort(SVector(a))
 vectortime[1] = @elapsed sort!([a])
 #= Do the same thing. Lines are hidden=#
 
-plot(samples, [swapsorttime svectortime vectortime], labels=[&quot;swapsort&quot; &quot;SVector&quot; &quot;Vector&quot;])</code></pre><img src="f8d2cd94.svg" alt="Example block output"/><h3 id="Runtime"><a class="docs-heading-anchor" href="#Runtime">Runtime</a><a id="Runtime-1"></a><a class="docs-heading-anchor-permalink" href="#Runtime" title="Permalink"></a></h3><p>Replacing <code>@elapsed</code> with <code>@belapsed</code>, we get the runtime.</p><pre><code class="language-julia hljs">plot(samples, [swapsorttime svectortime vectortime], labels=[&quot;swapsort&quot; &quot;SVector&quot; &quot;Vector&quot;])</code></pre><img src="b2083a7f.svg" alt="Example block output"/><h2 id="Different-types-(type-unstable)"><a class="docs-heading-anchor" href="#Different-types-(type-unstable)">Different types (type-unstable)</a><a id="Different-types-(type-unstable)-1"></a><a class="docs-heading-anchor-permalink" href="#Different-types-(type-unstable)" title="Permalink"></a></h2><p>When sorting across different types, methods based on <code>Tuple</code> or <code>Vararg</code> suffer from type inference as different orders have different types. As a result, the compilation time can be a lot longer. In this benchmark, we consider up to 23 variables of different types, including</p><ul><li>7 Number types: Int, Float, Irrational, Complex, Rational, BigInt, BigFloat</li><li>8 Collection types: Tuple, Set, Dict, Matrix, Vector, String, Range, NamedTuple</li><li>8 Other types: CartesianIndex, Pair, Function, Symbol, Type, Module, Nothing, Char</li></ul><pre><code class="language-julia hljs">using Random, SwapSort, Plots, BenchmarkTools, StaticArrays
+plot(samples, [swapsorttime svectortime vectortime], labels=[&quot;swapsort&quot; &quot;SVector&quot; &quot;Vector&quot;])</code></pre><img src="1717c9ab.svg" alt="Example block output"/><h3 id="Runtime"><a class="docs-heading-anchor" href="#Runtime">Runtime</a><a id="Runtime-1"></a><a class="docs-heading-anchor-permalink" href="#Runtime" title="Permalink"></a></h3><p>Replacing <code>@elapsed</code> with <code>@belapsed</code>, we get the runtime.</p><pre><code class="language-julia hljs">plot(samples, [swapsorttime svectortime vectortime], labels=[&quot;swapsort&quot; &quot;SVector&quot; &quot;Vector&quot;])</code></pre><img src="6262d1b8.svg" alt="Example block output"/><h2 id="Different-types-(type-unstable)"><a class="docs-heading-anchor" href="#Different-types-(type-unstable)">Different types (type-unstable)</a><a id="Different-types-(type-unstable)-1"></a><a class="docs-heading-anchor-permalink" href="#Different-types-(type-unstable)" title="Permalink"></a></h2><p>When sorting across different types, methods based on <code>Tuple</code> or <code>Vararg</code> suffer from type inference as different orders have different types. As a result, the compilation time can be a lot longer. In this benchmark, we consider up to 23 variables of different types, including</p><ul><li>7 Number types: Int, Float, Irrational, Complex, Rational, BigInt, BigFloat</li><li>8 Collection types: Tuple, Set, Dict, Matrix, Vector, String, Range, NamedTuple</li><li>8 Other types: CartesianIndex, Pair, Function, Symbol, Type, Module, Nothing, Char</li></ul><pre><code class="language-julia hljs">using Random, SwapSort, Plots, BenchmarkTools, StaticArrays
 a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w = shuffle(
     [rand(Int), rand(), π, im, 1//2, BigInt(rand(Int128)), rand(BigFloat),
     (1,2), Set([1,2]), Dict(1=&gt;2), rand(2,2), rand(Int, 10), randstring(), 1:10, (a=1,b=2),
-    CartesianIndex(1,2), 1=&gt;2, sin, :sin, typeof(sin), SwapSort, nothing, &#39;a&#39;])</code></pre><h3 id="Compilation-2"><a class="docs-heading-anchor" href="#Compilation-2">Compilation</a><a class="docs-heading-anchor-permalink" href="#Compilation-2" title="Permalink"></a></h3><img src="b1ea878f.svg" alt="Example block output"/><h3 id="Runtime-2"><a class="docs-heading-anchor" href="#Runtime-2">Runtime</a><a class="docs-heading-anchor-permalink" href="#Runtime-2" title="Permalink"></a></h3><img src="d8b6964e.svg" alt="Example block output"/></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../">« SwapSort.jl</a><a class="docs-footer-nextpage" href="../docstrings/">Docstrings »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="auto">Automatic (OS)</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.2.1 on <span class="colophon-date" title="Monday 26 February 2024 12:49">Monday 26 February 2024</span>. Using Julia version 1.10.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+    CartesianIndex(1,2), 1=&gt;2, sin, :sin, typeof(sin), SwapSort, nothing, &#39;a&#39;])</code></pre><h3 id="Compilation-2"><a class="docs-heading-anchor" href="#Compilation-2">Compilation</a><a class="docs-heading-anchor-permalink" href="#Compilation-2" title="Permalink"></a></h3><img src="a8477f34.svg" alt="Example block output"/><h3 id="Runtime-2"><a class="docs-heading-anchor" href="#Runtime-2">Runtime</a><a class="docs-heading-anchor-permalink" href="#Runtime-2" title="Permalink"></a></h3><img src="c371f2b9.svg" alt="Example block output"/></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../">« SwapSort.jl</a><a class="docs-footer-nextpage" href="../docstrings/">Docstrings »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="auto">Automatic (OS)</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.2.1 on <span class="colophon-date" title="Wednesday 28 February 2024 12:53">Wednesday 28 February 2024</span>. Using Julia version 1.10.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
