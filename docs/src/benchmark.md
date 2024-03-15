@@ -16,16 +16,16 @@ The precompilation is very slow since the package reads many `json` files and bu
 ```
 
 ## Same type (type-stable)
-When sorting variables of the same type, `swapsort` has longer compilation time but from 5x to 100x runtime depending on the sorting size. To save the build time of the doc, this page only contains a simplified benchmark. For the full benchmark, run the [script](https://github.com/putianyi889/SwapSort.jl/blob/master/scripts/bench_var_sorting.jl).
+When sorting variables of the same type, `swapsort` has longer compilation time but from .01x to .2x runtime depending on the sorting size. To save the build time of the doc, this page only contains a simplified benchmark. For the full benchmark, run the [script](https://github.com/putianyi889/SwapSort.jl/blob/master/scripts/bench_var_sorting.jl).
 ```@example benchmark2
-using SwapSort, StaticArrays, Plots, BenchmarkTools
+using SwapSort, StaticArrays, PlotlyLight, BenchmarkTools, PlotlyDocumenter
 using LaTeXStrings # hide
 BenchmarkTools.DEFAULT_PARAMETERS.seconds = 0.5 # hide
 samples = [1,2,4,8,16,32,64]
 swapsorttime = zeros(7)
 svectortime = zeros(7)
 vectortime = zeros(7)
-default(background_color=:transparent, foreground_color=:gray, yaxis=:log, xaxis=:log2, xticks=(samples, [L"2^0", L"2^1", L"2^2", L"2^3", L"2^4", L"2^5", L"2^6"])) # hide
+# default(background_color=:transparent, foreground_color=:gray, yaxis=:log, xaxis=:log2, xticks=(samples, [L"2^0", L"2^1", L"2^2", L"2^3", L"2^4", L"2^5", L"2^6"])) # hide
 a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,Ja,Fe,Ma,Ap,My,Ju,Jl,Au,Se,Oc,No,De = rand(64)
 ```
 
@@ -57,7 +57,7 @@ vectortime[5] = @elapsed sort!([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p]) # hide
 vectortime[6] = @elapsed sort!([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F]) # hide
 vectortime[7] = @elapsed sort!([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,Ja,Fe,Ma,Ap,My,Ju,Jl,Au,Se,Oc,No,De]) # hide
 
-plot(samples, [swapsorttime svectortime vectortime], labels=["swapsort" "SVector" "Vector"])
+plot.scatter(x=samples, y=swapsorttime).scatter(x=samples,y=svectortime).scatter(x=samples,y=vectortime) |> to_documenter
 ```
 
 ### Runtime
@@ -87,7 +87,11 @@ vectortime[5] = @belapsed sort!([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p]) # hide
 vectortime[6] = @belapsed sort!([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F]) # hide
 vectortime[7] = @belapsed sort!([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,Ja,Fe,Ma,Ap,My,Ju,Jl,Au,Se,Oc,No,De]) # hide
 
-plot(samples, [swapsorttime svectortime vectortime], labels=["swapsort" "SVector" "Vector"])
+plot.scatter(x=samples, y=swapsorttime).scatter(x=samples,y=svectortime).scatter(x=samples,y=vectortime) |> to_documenter
+```
+
+```@repl benchmark2
+HTML(repr("text/html", Plot(x=rand(10),y=rand(10))))
 ```
 
 ## Different types (type-unstable)
@@ -96,8 +100,8 @@ When sorting across different types, methods based on `Tuple` or `Vararg` suffer
 - 8 Collection types: Tuple, Set, Dict, Matrix, Vector, String, Range, NamedTuple
 - 8 Other types: CartesianIndex, Pair, Function, Symbol, Type, Module, Nothing, Char
 ```@example benchmark3; continued=true
-using Random, SwapSort, Plots, BenchmarkTools, StaticArrays
-default(background_color=:transparent, foreground_color=:gray, yaxis=:log, xaxis=:identity, xticks=1:23) # hide
+using Random, SwapSort, PlotlyLight, BenchmarkTools, StaticArrays, PlotlyDocumenter
+# default(background_color=:transparent, foreground_color=:gray, yaxis=:log, xaxis=:identity, xticks=1:23) # hide
 BenchmarkTools.DEFAULT_PARAMETERS.seconds = 0.5 # hide
 a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w = shuffle(
     [rand(Int), rand(), π, im, 1//2, BigInt(rand(Int128)), rand(BigFloat), 
@@ -157,7 +161,7 @@ vectortime[21] = @elapsed sort!([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u]; by=
 vectortime[22] = @elapsed sort!([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v]; by=string) # hide
 vectortime[23] = @elapsed sort!([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w]; by=string) # hide
 
-plot([swapsorttime vectortime]) # hide
+plot.scatter(x=1:23, y=swapsorttime).scatter(x=1:23,y=vectortime) |> to_documenter # hide
 ```
 
 ### Runtime
@@ -210,5 +214,5 @@ vectortime[21] = @belapsed sort!([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u]; by
 vectortime[22] = @belapsed sort!([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v]; by=string) # hide
 vectortime[23] = @belapsed sort!([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w]; by=string) # hide
 
-plot([swapsorttime vectortime]) # hide
+plot.scatter(x=1:23, y=swapsorttime).scatter(x=1:23,y=vectortime) |> to_documenter # hide
 ```
