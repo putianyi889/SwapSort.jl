@@ -252,7 +252,7 @@ vectortime[21] = @belapsed sort!([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u]; by
 vectortime[22] = @belapsed sort!([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v]; by=string) # hide
 vectortime[23] = @belapsed sort!([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w]; by=string) # hide
 
-thisplot = plot.scatter(x=1:23, y=swapsorttime).scatter(x=1:23,y=vectortime) # hide
+thisplot = plot.scatter(x=1:23, y=swapsorttime, name="SwapSort").scatter(x=1:23,y=vectortime, name="Base") # hide
 thisplot.layout.yaxis = (
     type = "log",
     dtick = 1,
