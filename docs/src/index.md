@@ -10,18 +10,11 @@ This package is intended to be a successor of [SortingNetworks.jl](https://githu
   - Very long precompilation (~30s on CI). The current bottleneck is `JSON.parsefile`. The compilation is ok and the importing is fast.
   - Harder to troubleshoot since the most important things are written in macros.
   - Does not support sorting a vector. The reason is that `Base.sort` is efficient enough for a vector.
-  - Does not support sorting a tuple at present.
 
 ## Internals
-There are many internal functions in the form of `swapsortN_L_D(::Vararg{Any,N})`. `N` refers to the data size, `L` refers to the number of comparisons/swaps. Although currently unsupported, it's possible to execute some swaps in parallel and `D` refers to the number of steps when computing in parallel. All available `(N,L,D)` triples are listed at `SwapSort.SORTERS`.
-```@repl index1
-show(SwapSort.SORTERS)
-```
+There are many internal functions in the form of `swapsortN_L_D(::Vararg{Any,N})`. `N` refers to the data size, `L` refers to the number of comparisons/swaps. Although currently unsupported, it's possible to execute some swaps in parallel and `D` refers to the number of steps when computing in parallel. All available `(N,L,D)` triples are listed at [`SwapSort.SORTERS`](@ref).
 
-The exported `swapsort` at present chooses the least available `L` for each `N`. For example, `swapsort(a,b) = swapsort2_1_1(a,b)`. The choices are listed at `SwapSort.BESTSIZE`.
-```@repl index1
-show(SwapSort.BESTSIZE)
-```
+The exported `swapsort` at present chooses the least available `L` for each `N`. For example, `swapsort(a,b) = swapsort2_1_1(a,b)`. The choices are listed at [`SwapSort.BESTSIZE`](@ref).
 
 The exported `tuplesort` is just another wrapper. It uses a different name as `swapsort` because otherwise it would be ambiguous whether the tuple is considered as one element or a group of elements. We note that `TupleTools.jl` uses merge sort on tuples.
 
