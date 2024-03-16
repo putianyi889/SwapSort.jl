@@ -190,15 +190,15 @@ vectortime[22] = @elapsed sort!([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v]; b
 vectortime[23] = @elapsed sort!([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w]; by=sizeof) # hide
 
 thisplot = plot.scatter(x=1:23, y=swapsorttime, name="SwapSort").scatter(x=1:23,y=vectortime, name="Base") # hide
-thisplot.layout.yaxis = (
-    type = "log",
-    dtick = 1,
-    exponentformat = "power",
-    title = "Compilation"
+thisplot.layout.yaxis = ( # hide
+    type = "log", # hide
+    dtick = 1, # hide
+    exponentformat = "power", # hide
+    title = "Compilation" # hide
 ) # hide
-thisplot.layout.xaxis = (
-    dtick = 1,
-    title = "N"
+thisplot.layout.xaxis = ( # hide
+    dtick = 1, # hide
+    title = "N" # hide
 ) # hide
 to_documenter(thisplot) # hide
 ```
@@ -254,15 +254,15 @@ vectortime[22] = @belapsed sort!([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v]; 
 vectortime[23] = @belapsed sort!([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w]; by=sizeof) # hide
 
 thisplot = plot.scatter(x=1:23, y=swapsorttime, name="SwapSort").scatter(x=1:23,y=vectortime, name="Base") # hide
-thisplot.layout.yaxis = (
-    type = "log",
-    dtick = 1,
-    exponentformat = "power",
-    title = "Runtime"
+thisplot.layout.yaxis = ( # hide
+    type = "log", # hide
+    dtick = 1, # hide
+    exponentformat = "power", # hide
+    title = "Runtime" # hide
 ) # hide
-thisplot.layout.xaxis = (
-    dtick = 1,
-    title = "N"
+thisplot.layout.xaxis = ( # hide
+    dtick = 1, # hide
+    title = "N" # hide
 ) # hide
 to_documenter(thisplot) # hide
 ```
