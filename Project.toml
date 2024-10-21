@@ -1,7 +1,7 @@
 name = "SwapSort"
 uuid = "518c31a9-72dd-41b9-826f-606c4258a582"
 authors = ["Tianyi Pu <912396513@qq.com> and contributors"]
-version = "1.0.0"
+version = "1.0.1"
 
 [deps]
 JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
