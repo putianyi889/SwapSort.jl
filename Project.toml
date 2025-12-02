@@ -1,7 +1,7 @@
 name = "SwapSort"
 uuid = "518c31a9-72dd-41b9-826f-606c4258a582"
-authors = ["Tianyi Pu <912396513@qq.com> and contributors"]
 version = "1.2.0"
+authors = ["Tianyi Pu <912396513@qq.com> and contributors"]
 
 [deps]
 JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
@@ -9,7 +9,7 @@ Unroll = "36e64239-2ab9-4580-84fb-56737a503d36"
 
 [compat]
 Aqua = "0.8"
-JSON = "0.21"
+JSON = "0.21, 1"
 Random = "1"
 Scanf = "0.5"
 Test = "1"
