@@ -10,7 +10,7 @@ Unroll = "36e64239-2ab9-4580-84fb-56737a503d36"
 [compat]
 Aqua = "0.8"
 JSON = "0.21, 1"
-Random = "1"
+Random = "<0.0.1, 1"
 Scanf = "0.5"
 Test = "1"
 Unroll = "0.1"
