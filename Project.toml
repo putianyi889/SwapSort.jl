@@ -12,7 +12,7 @@ Aqua = "0.8"
 JSON = "0.21, 1"
 Random = "1"
 Scanf = "0.5"
-Test = "1"
+Test = "<0.0.1, 1"
 Unroll = "0.1"
 julia = "1"
 
